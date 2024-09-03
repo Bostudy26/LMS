@@ -4,7 +4,10 @@ import axios from "axios";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
+
+import Link from "next/link";
+import toast from "react-hot-toast";
+
 import {
     Form,
     FormControl,
@@ -15,7 +18,7 @@ import {
     FormItem,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input"
-import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 const formSchema = z.object({
     title: z.string().min(1, {
@@ -38,7 +41,7 @@ const CreatePage = () => {
             const respone = await axios.post("/api/course", values);
             router.push(`/teacher/courses/${respone.data.id}`);
         } catch {
-            console.log("Something went wrong");
+            toast.error("Something went wrong");
         }
     }
 
