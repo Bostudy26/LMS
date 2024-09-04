@@ -20,18 +20,20 @@ export async function POST(
                 userId: userId,
             }
         });
-
+        if(!courseOwner){
+            return new NextResponse("Unauthorized", {status: 401})
+        }
+        
         const attachment = await db.attachment.create({
             data:{
                 url,
                 name: url.split("/").pop(),
                 courseId: params.courseId,
             }
+            
         })
+        return NextResponse.json(attachment)
 
-        if(!courseOwner){
-            return new NextResponse("Unauthorized", {status: 401})
-        }
     } catch(error){
         console.log("COURSE_ID_ATTACHMENTS",error);
         return new NextResponse("Internal Error", {status: 500});

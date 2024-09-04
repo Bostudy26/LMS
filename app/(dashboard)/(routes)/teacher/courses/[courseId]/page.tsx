@@ -29,9 +29,9 @@ const CourseIdPage = async ({params}: {params: {courseId: string}}) => {
                 orderBy: {
                     createdAt: "desc"
                 },
-            },
-        },
-    });
+            }
+        }
+    })
 
     const categories = await db.category.findMany({
         orderBy:{
