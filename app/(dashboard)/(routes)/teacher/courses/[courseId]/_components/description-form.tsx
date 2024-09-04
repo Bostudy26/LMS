@@ -19,15 +19,14 @@ import { Pencil } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
+import { Course } from "@prisma/client";
 
 
 
 
 
 interface DescriptionFormProps {
-    initialData: {
-        description: string;
-    };
+    initialData: Course;
     courseId: string;
 }
 
@@ -46,7 +45,9 @@ const DescriptionForm = ({initialData,courseId} : DescriptionFormProps) => {
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
-        defaultValues: initialData,
+        defaultValues:{
+            description: initialData?.description || ""
+        },
     })
 
     const {isSubmitting, isValid} = form.formState;
