@@ -19,6 +19,7 @@ import { Pencil } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Chapter } from "@prisma/client";
 import { Editor } from "@/components/editor";
+import { Preview } from "@/components/preview";
 
 
 
@@ -71,19 +72,24 @@ const ChapterDescriptionForm = ({initialData,courseId,chapterId} : ChapterDescri
                     ) : (
                         <>
                             <Pencil className="h-4 w-4 mr-2" />
-                            Edit title
+                            Edit description
                         </>
                     )}
 
                 </Button>
             </div>
             {!isEditing && (
-                <p className={cn(
+                <div className={cn(
                     "text-sm mt-2",
                     !initialData.description && "text-slate-500 italic"
                 )}>
-                    {initialData?.description || "no description"}
-                </p>
+                    {!initialData?.description && "no description"}
+                    {initialData.description && (
+                        <Preview 
+                            value={initialData.description}
+                        />
+                    )}
+                </div>
             )}
             {isEditing && (
             <Form {...form}>

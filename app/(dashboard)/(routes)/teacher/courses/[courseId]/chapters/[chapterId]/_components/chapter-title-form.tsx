@@ -68,7 +68,7 @@ const  ChapterTitleForm = ({initialData,courseId,chapterId} : ChapterTitleFormPr
                     ) : (
                         <>
                             <Pencil className="h-4 w-4 mr-2" />
-                            Edit Chapter
+                            Edit title
                         </>
                     )}
 
