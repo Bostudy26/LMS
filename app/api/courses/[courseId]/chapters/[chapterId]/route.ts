@@ -7,8 +7,8 @@ export async function PATCH(
     {params} : {params: {courseId:string; chapterId: string}}
 ) {
     try {
-        const {userId} = auth();
-        const {isPublished, ...values} = await req.json();
+        const { userId } = auth();
+        const { isPublished, ...values } = await req.json();
 
         if(!userId){
             return new NextResponse("Unauthorized", {status : 401});
@@ -16,10 +16,10 @@ export async function PATCH(
 
         const ownCourse = await db.course.findUnique({
             where: {
-                id: params.courseId,
-                userId
+              id: params.courseId,
+              userId
             }
-        })
+          });
 
         if(!ownCourse){
             return new NextResponse("Unauthorized", {status : 401});
@@ -27,13 +27,13 @@ export async function PATCH(
 
         const chapter = await db.chapter.update({
             where: {
-                id: params.chapterId,
-                courseId: params.courseId,
+              id: params.chapterId,
+              courseId: params.courseId,
             },
-            data:{
-                ...values,
+            data: {
+              ...values,
             }
-        });
+          });
 
         // TODO: handle Vide upload
 
