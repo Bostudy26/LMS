@@ -6,6 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["fullTextSearch" , "fullTextIndex"]
 }
 
 datasource db {
@@ -35,6 +36,7 @@ model Course {
   updateAt DateTime @updatedAt
 
   @@index([categoryId])
+  @@fulltext([title])
 }
 
 model Category{
@@ -95,7 +97,7 @@ model UserProgress{
   chapterId String
   chapter Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
 
-  isComplated Boolean @default(false)
+  isCompleted Boolean @default(false)
 
   createdAt DateTime @default(now())
   updateAt DateTime @updatedAt
