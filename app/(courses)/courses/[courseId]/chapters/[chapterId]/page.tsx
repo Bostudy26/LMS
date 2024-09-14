@@ -9,6 +9,8 @@ import { Separator } from "@/components/ui/separator";
 import { VideoPlayer } from "./_components/video-player";
 import { CourseEnrollButton } from "./_components/course-enroll-button";
 import { Preview } from "@/components/preview";
+import { CourseProgressButton } from "./_components/Course-Progress-Button";
+
 
 const ChapterIdpage = async ({params} : {params: { courseId: string; chapterId: string;}}) => {
 
@@ -73,10 +75,12 @@ const ChapterIdpage = async ({params} : {params: { courseId: string; chapterId: 
                             {chapter.title}
                         </h2>
                         {purchase ? (
-                            <div>
-                                // TODO: Add CourseProgressButton
-                            </div>
-
+                        <CourseProgressButton
+                            chapterId={params.chapterId}
+                            courseId={params.courseId}
+                            nextChapter={nextChapter?.id}
+                            isCompleted={!!userProgress?.isCompleted}
+                        />
                         ) : (
                             <CourseEnrollButton
                                 courseId={params.courseId}
