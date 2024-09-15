@@ -18,7 +18,7 @@ export const getDashboardCourses = async (userId: string): Promise<DashboardCour
 
         const purchasedCourses = await db.purchase.findMany({
             where: {
-                userId
+                userId : userId
             },
             select: {
                 course: {
@@ -44,7 +44,7 @@ export const getDashboardCourses = async (userId: string): Promise<DashboardCour
         // Handle completed and couress in progress
         const completedCourses = courses.filter((course) => course.progress === 100);
         // Handle null progress
-        const coursesInProgress = courses.filter((course) => course.progress ?? 0);
+        const coursesInProgress = courses.filter((course) => (course.progress ?? 0) < 100);
 
         return {
             completedCourses,
