@@ -2,6 +2,8 @@ import { getAnalytics } from "@/actions/get-analytics";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { DataCard } from "./_components/data-card";
+import Chart from "./_components/chart";
+
 
 
  
@@ -32,6 +34,9 @@ const AnalyticsPAge = async () => {
                     label="Total Sales"
                 />    
             </div>
+            <Chart
+                data={data}
+            />
         </div>
     );
 }
